@@ -6,7 +6,7 @@ export class Cart{
     }
      cartItem(productName:string):Locator{
         
-        return this.page.locator('.cart_list').filter({has: this.page.getByText(productName)})
+        return this.page.locator('.cart_item').filter({has: this.page.getByText(productName)})
       
     }
     cartItemName(productName:string):Locator{

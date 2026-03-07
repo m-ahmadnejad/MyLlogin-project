@@ -9,6 +9,9 @@ async checkoutInfo(firstName:string,lastName:string,ZipCode:string){
     await this.page.locator('#first-name').fill(firstName)
     await this.page.locator('#last-name').fill(lastName)
     await this.page.locator('#postal-code').fill(ZipCode)
-    await this.page.locator('#continue').click()
+   
+}
+async continueButton(){
+     await this.page.locator('#continue').click()
 }
 }
