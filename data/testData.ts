@@ -1,3 +1,5 @@
+import { validUsers } from "./loginData";
+
 export const products = {
   backpack: 'Sauce Labs Backpack',
   bikeLight: 'Sauce Labs Bike Light',
@@ -5,27 +7,33 @@ export const products = {
 };
 
 export const checkoutUsers = {
-  validUser: {
+    validUser:{
     firstName: 'Mojgan',
     lastName: 'Test',
     postalCode: '123'
-  },
-
-  emptyFirstName: {
+  }}
+export const InvalidCheckout=[
+   {
+    title:'empty first name',
     firstName: '',
     lastName: 'Test',
-    postalCode: '123'
+    postalCode: '123',
+    getError :'Error: First Name is required'
   },
 
-  emptyLastName: {
+  {
+    title :'empty last name',
     firstName: 'Mojgan',
     lastName: '',
-    postalCode: '123'
+    postalCode: '123',
+    getError :'Error: Last Name is required'
   },
 
-  emptyPostalCode: {
+  {
+    title : 'empty postal code',
     firstName: 'Mojgan',
     lastName: 'Test',
-    postalCode: ''
+    postalCode: '',
+    getError :'Error: Postal Code is required'
   }
-};
+];

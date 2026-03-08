@@ -14,4 +14,7 @@ async checkoutInfo(firstName:string,lastName:string,ZipCode:string){
 async continueButton(){
      await this.page.locator('#continue').click()
 }
+  getError(){
+    return  this.page.locator('[data-test="error"]')
+}
 }

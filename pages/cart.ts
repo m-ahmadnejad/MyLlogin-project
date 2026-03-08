@@ -1,4 +1,5 @@
 import{Locator, Page} from '@playwright/test'
+import { products } from '../data/testData'
 
 export class Cart{
     constructor(private page:Page){
@@ -16,4 +17,6 @@ export class Cart{
     async checkoutOpen(){
        await this.page.getByRole('button',{name :'Checkout'}).click()
     }
+
+
 }
