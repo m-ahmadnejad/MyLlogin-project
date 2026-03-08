@@ -14,7 +14,7 @@ async checkoutInfo(firstName:string,lastName:string,ZipCode:string){
 async clickContinue(){
      await this.page.locator('#continue').click()
 }
-  errorMessege(){
+  errorMessage(){
     return  this.page.locator('[data-test="error"]')
 }
 }

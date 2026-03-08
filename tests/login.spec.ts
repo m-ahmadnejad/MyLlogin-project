@@ -15,7 +15,8 @@ test(`invalid login for ${user.username}`, async({page})=>{
     const loginpage =new LoginPage(page)
     await loginpage.login(user.username,user.password)
     await expect( loginpage.getError()).toBeVisible()
-    await expect(loginpage.getError()).toContainText('Epic')
+    await expect(loginpage.getError()).toContainText(user.error);
+    )
 })
 })
 

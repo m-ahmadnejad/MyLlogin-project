@@ -1,12 +1,12 @@
 import { InventoryPage } from "../pages/Inventory"
 
-export async function addItemAndOpenCart(InventoryPage,productName:string) {
+export async function addItemAndOpenCart(inventoryPage,productName:string) {
 
-    await InventoryPage.addToCart(productName)
-    await InventoryPage.openCart()
+    await inventoryPage.addToCart(productName)
+    await inventoryPage.openCart()
 }
-export async function goToCheckoutStepOne(InventoryPage,cartPage,productName:string) {
-    await addItemAndOpenCart(InventoryPage,productName)
+export async function goToCheckoutStepOne(inventoryPage,cartPage,productName:string) {
+    await addItemAndOpenCart(inventoryPage,productName)
     await cartPage.openCheckout()
  
 }

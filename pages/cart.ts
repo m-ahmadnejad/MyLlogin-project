@@ -17,11 +17,7 @@ export class CartPage{
     async openCheckout(){
        await this.page.getByRole('button',{name :'Checkout'}).click()
     }
-     async removeFromInventory(productName:string){
-        const productContainer= this.page.locator('.inventory_item').filter({has: this.page.getByText(productName, {exact:true})})
-        //console.log( 'product:', await nameProduct.textContent())
-        await productContainer.getByRole('button', {name : 'Remove'}).click()
-    }
+
 async removeItemfromCart(productName:string){
     const productContainer = await this.page.locator('.cart_item').filter({has:this.page.getByText(productName)})
     productContainer.getByRole('button',{name:'Remove'}).click()
