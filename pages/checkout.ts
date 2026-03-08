@@ -1,6 +1,6 @@
 import {Page} from '@playwright/test'
 
-export class checkout{
+export class CheckoutPage{
     constructor(private page:Page){
         this.page =page
     }
@@ -11,10 +11,10 @@ async checkoutInfo(firstName:string,lastName:string,ZipCode:string){
     await this.page.locator('#postal-code').fill(ZipCode)
    
 }
-async continueButton(){
+async clickContinue(){
      await this.page.locator('#continue').click()
 }
-  getError(){
+  errorMessege(){
     return  this.page.locator('[data-test="error"]')
 }
 }

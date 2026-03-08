@@ -4,7 +4,7 @@ export class CheckoutCompeletPage{
     constructor(private page:Page){
         this.page=page
     }
-async BackHome(){
+async clickBackHome(){
     await this.page.locator('#back-to-products').click()
 }
 

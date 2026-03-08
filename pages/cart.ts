@@ -1,7 +1,7 @@
 import{Locator, Page} from '@playwright/test'
 import { products } from '../data/testData'
 
-export class Cart{
+export class CartPage{
     constructor(private page:Page){
         this.page=page
     }
@@ -14,9 +14,19 @@ export class Cart{
         return this.cartItem(productName).locator('.inventory_item_name')
     }
 
-    async checkoutOpen(){
+    async openCheckout(){
        await this.page.getByRole('button',{name :'Checkout'}).click()
     }
+     async removeFromInventory(productName:string){
+        const productContainer= this.page.locator('.inventory_item').filter({has: this.page.getByText(productName, {exact:true})})
+        //console.log( 'product:', await nameProduct.textContent())
+        await productContainer.getByRole('button', {name : 'Remove'}).click()
+    }
+async removeItemfromCart(productName:string){
+    const productContainer = await this.page.locator('.cart_item').filter({has:this.page.getByText(productName)})
+    productContainer.getByRole('button',{name:'Remove'}).click()
+
+}
 
 
 }
