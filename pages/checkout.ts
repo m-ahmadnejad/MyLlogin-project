@@ -11,6 +11,9 @@ async checkoutInfo(firstName:string,lastName:string,ZipCode:string){
     await this.page.locator('#postal-code').fill(ZipCode)
    
 }
+continueButton(){
+    return this.page.locator('#continue')
+}
 async clickContinue(){
      await this.page.locator('#continue').click()
 }

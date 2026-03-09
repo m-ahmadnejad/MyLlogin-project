@@ -6,7 +6,6 @@ export class CartPage{
         this.page=page
     }
      cartItem(productName:string):Locator{
-        
         return this.page.locator('.cart_item').filter({has: this.page.getByText(productName)})
       
     }
@@ -17,10 +16,8 @@ export class CartPage{
     async openCheckout(){
        await this.page.getByRole('button',{name :'Checkout'}).click()
     }
-
-async removeItemfromCart(productName:string){
-    const productContainer = await this.page.locator('.cart_item').filter({has:this.page.getByText(productName)})
-    productContainer.getByRole('button',{name:'Remove'}).click()
+    async removeItemfromCart(productName:string){
+    await this.cartItem(productName).getByRole('button',{name:'Remove'}).click()
 
 }
 
