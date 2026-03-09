@@ -31,9 +31,7 @@ export class CheckoutStepTwoPage{
   }
   async clickFinish(){
     await this.page.locator('#finish').click()
-  }
-   completeHeader(){
-    return this.page.locator('h2.complete-header')
-  }
+
     
 } 
+}

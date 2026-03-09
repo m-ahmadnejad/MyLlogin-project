@@ -7,5 +7,9 @@ export class CheckoutCompeletPage{
 async clickBackHome(){
     await this.page.locator('#back-to-products').click()
 }
+  
+   completeHeader(){
+    return this.page.locator('h2.complete-header')
+  }
 
 }

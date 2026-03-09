@@ -1,12 +1,13 @@
 import {test, expect} from '../Fixture/fixtures.ts'
 import { products,checkoutUsers,InvalidCheckout } from '../data/testData.ts';
 import { addItemAndOpenCart, fillCheckoutInfoAndContinue, goToCheckoutStepOne} from '../helper/helpers.ts';
+
+test.use({ storageState: 'playwright/.auth/user.json' });
+test.describe('Cart', ()=>{
 test.beforeEach(async({page})=>{
   await page.goto('https://www.saucedemo.com/inventory.html')
   await expect(page).toHaveURL(/inventory\.html/)
 })
-test.use({ storageState: 'playwright/.auth/user.json' });
-test.describe('Cart', ()=>{
 test('add item to cart', async({page, inventoryPage})=>{
       console.log('URL after goto:', page.url());
       await inventoryPage.addToCart(products.backpack)
@@ -34,6 +35,10 @@ test('remove item from cart', async({page,inventoryPage,cartPage})=>{
 })
 })
 test.describe('Checkout', () => {
+test.beforeEach(async({page})=>{
+  await page.goto('https://www.saucedemo.com/inventory.html')
+  await expect(page).toHaveURL(/inventory\.html/)
+})
 test('checkout process',async({page,inventoryPage,cartPage,checkoutPage})=>{
     await goToCheckoutStepOne(inventoryPage,cartPage,products.backpack)
     await expect(page).toHaveURL('https://www.saucedemo.com/checkout-step-one.html')
@@ -70,7 +75,7 @@ test('checkout review', async({page,inventoryPage,cartPage,checkoutPage,checoutR
     expect(summery.tax).toBeCloseTo(2.40, 2)
     expect(summery.total).toBeCloseTo(32.39, 2)
     await checoutReviewPage.clickFinish()
-    await expect(checoutReviewPage.completeHeader()).toHaveText('Thank you for your order!')
+    await expect(checoutCompletePage.completeHeader()).toHaveText('Thank you for your order!')
     await expect(page).toHaveURL('https://www.saucedemo.com/checkout-complete.html')
     await checoutCompletePage.clickBackHome()
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html')
@@ -80,6 +85,10 @@ test('checkout review', async({page,inventoryPage,cartPage,checkoutPage,checoutR
 })
 
 test.describe('Checkout validation', () => {
+test.beforeEach(async({page})=>{
+  await page.goto('https://www.saucedemo.com/inventory.html')
+  await expect(page).toHaveURL(/inventory\.html/)
+})
         InvalidCheckout.forEach((data)=>{
         test(`checkout with invalid data ${data.title}`,async({page,inventoryPage,cartPage,checkoutPage})=>{
              await goToCheckoutStepOne(inventoryPage,cartPage,products.backpack)
@@ -87,7 +96,7 @@ test.describe('Checkout validation', () => {
              await fillCheckoutInfoAndContinue(checkoutPage,data.firstName,data.lastName,data.postalCode)
              await expect(checkoutPage.continueButton()).toBeVisible()
              await expect(checkoutPage.continueButton()).toBeEnabled()
-             await expect(await checkoutPage.errorMessage()).toContainText(data.getError)
+             await expect(checkoutPage.errorMessage()).toContainText(data.getError)
              console.log('Error',data.getError)
              await expect(page).toHaveURL('https://www.saucedemo.com/checkout-step-one.html')
         })
